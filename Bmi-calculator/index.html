@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        .container{
+            text-align: center;
+            border: 2px solid teal;
+            /* height: 90vh; */
+            width: 50rem;
+            margin: auto;
+            background-color: skyblue;
+        }
+        .head{
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="head">BMI CALCULATOR</h1>
+        <h2>Check Your BMI</h2>
+        <h4>Enter Your Weight And Height Below To Check Your BMI Results</h4>
+        <div class="input-box">
+            <label for="">Put Your Weight in here (KG)</label>
+            <input type="number" id="Weight">
+            <label for="">And Your Height in here (METERS)</label>
+            <input type="number" id="Height">
+        </div>
+        <button type="submit" id="submit-btn" >Calculate BMI</button>
+        <h2 id="data-show"><h2>
+        <h2 id="invalid-value"></h2>
+    </div>
+    <script>
+        let btn = document.getElementById('submit-btn')
+        let showData = document.getElementById('data-show')
+        let weightValue = document.getElementById('Weight')
+        let heightValue = document.getElementById('Height')
+        let invalid = document.getElementById('invalid-value')
+
+        btn.addEventListener('click', function(){
+            // get user input value
+            // console.log('Button Clicked')
+            let BMI = (weightValue.value / (heightValue.value * 2)).toFixed(3)
+            // console.log(BMI) 
+            let bodyType = '';
+            if(BMI <= 18.4){
+                bodyType = 'UnderWeight';
+                showData.style.backgroundColor = 'lightblue';
+                showData.style.display = 'block';
+                invalid.style.display = 'none';
+            }else if(BMI >= 18.5 && BMI <= 24.9){
+                bodyType = 'Normal Weight';
+                showData.style.backgroundColor = 'lightgreen';
+                showData.style.display = 'block';
+                invalid.style.display = 'none'
+            }else if(BMI >= 25 && BMI <= 29.9){
+                bodyType = 'Overweight';
+                showData.style.backgroundColor = 'tomato';
+                showData.style.display = 'block';
+                invalid.style.display = 'none'
+            }else if(BMI >= 30){
+                bodyType = 'Obese';
+                showData.style.backgroundColor = 'red';
+                showData.style.display = 'block';
+                invalid.style.display = 'none'
+            }
+            else if(weightValue.value <= 0 || heightValue.value <=  0){
+                showData.style.display = 'none';
+                invalid.style.display = 'block'
+                invalid.innerHTML = "Please Enter a Valid Value!"
+                // console.log('Enter a valid input from console');
+            }
+            showData.innerText = `Your BMI is ${BMI} Which Mean Your are ${bodyType}`   
+        })
+
+        // handleSubmit(){
+
+        // }
+    </script>
+</body>
+</html>
